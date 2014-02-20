@@ -1,9 +1,9 @@
 
-code = """
+{convert} = require './convert'
 
-set a 1
-print b 2
-
-"""
-
-require('./convert').convert code
+req = new XMLHttpRequest
+req.open 'GET', 'cirru/html.cirru'
+req.send()
+req.onload = ->
+  html = convert req.responseText
+  document.querySelector('#entry').innerHTML = html

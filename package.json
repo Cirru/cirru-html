@@ -1,6 +1,6 @@
 {
   "name": "cirru-html",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "convert Cirru to HTML",
   "main": "src/convert.js",
   "scripts": {
@@ -13,6 +13,6 @@
   "author": "jiyinyiyong",
   "license": "ISC",
   "dependencies": {
-    "cirru-parser": "~0.7.1"
+    "cirru-parser": "*"
   }
 }
