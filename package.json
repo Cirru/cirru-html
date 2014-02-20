@@ -1,0 +1,18 @@
+{
+  "name": "cirru-html",
+  "version": "0.0.0",
+  "description": "convert Cirru to HTML",
+  "main": "src/convert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cirru",
+    "html"
+  ],
+  "author": "jiyinyiyong",
+  "license": "ISC",
+  "dependencies": {
+    "cirru-parser": "~0.7.1"
+  }
+}
