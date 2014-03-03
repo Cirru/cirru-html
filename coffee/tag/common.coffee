@@ -16,6 +16,9 @@ exports.CommonTag = class CommonTag
       classes: []
     @children = []
 
+    @readFunc()
+    @readArgs()
+
   readFunc: ->
     matchTag = @func.match /^[\w-]+/
     if matchTag?
