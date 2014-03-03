@@ -72,7 +72,7 @@ IfExpression
 RepeatExpression &key, &value
 WithExpression
 InsertExpression
-IncludeExpression
+PartialExpression
 BlockExpression
 DefineExpression
 MethodsExpression

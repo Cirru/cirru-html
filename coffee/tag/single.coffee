@@ -6,3 +6,9 @@ exports.singleTags = singleTags.split ' '
 {CommonTag} = require './common'
 
 exports.SingleTag = class SingleTag extends CommonTag
+  render: (data) ->
+    attrs = @renderAttrs data
+    if attrs.length > 0
+      "<#{@tagName} #{attrs}>"
+    else
+      "<#{@tagName}>"
