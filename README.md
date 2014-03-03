@@ -44,3 +44,36 @@ Converts to (this module doesn't do prettify things yet):
 <div id="demo">content</div>
 <div class="class-a"></div>
 ```
+
+### Architeture
+
+Steps of rendering:
+
+```
+Cirru Code
+  -> Syntax Tree
+    -> Abstract Syntax Tree, based on Classes
+      -> Cached Tree, HTML data converted
+        -> Rendering
+```
+
+Classes for rendering HTML:
+
+```
+SingleTag
+PairTag
+TextTag
+```
+
+Classes for expressions
+
+```
+IfExpression
+RepeatExpression &key, &value
+WithExpression
+InsertExpression
+IncludeExpression
+BlockExpression
+DefineExpression
+MethodsExpression
+```
