@@ -61,7 +61,7 @@ exports.CommonTag = class CommonTag
       if typeof value is 'string'
         buffer.push "#{key}=\"#{value}\""
       else
-        result = value.render()
+        result = value.render data
         buffer.push "#{key}='#{result}'"
     buffer.join(' ')
 

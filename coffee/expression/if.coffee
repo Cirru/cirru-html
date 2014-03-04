@@ -15,7 +15,7 @@ exports.IfExpression = class IfExpression
     @readArgs()
 
   readArgs: ->
-    @condition = args[0]
+    @condition = makeAbstract args[0]
     @trueExpression = makeAbstract args[1]
     @falseExpression = makeAbstract args[2] if args[2]?
 
@@ -26,7 +26,7 @@ exports.IfExpression = class IfExpression
     no
 
   render: (data) ->
-    if evaluate data, @condition...
+    if @condition.render data
       @trueExpression.render data
     else if @falseExpression?
       @falseExpression.render data

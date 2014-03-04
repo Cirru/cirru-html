@@ -15,5 +15,5 @@ exports.PairTag = class PairTag extends CommonTag
       return @cachedInnerHTML
     buffer = ''
     for item in @children
-      buffer += item.render()
+      buffer += item.render data
     buffer

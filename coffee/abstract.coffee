@@ -11,16 +11,18 @@
 {BlockExpression} = require './expression/block'
 {DefineExpression} = require './expression/define'
 {MethodsExpression} = require './expression/methods'
+{AtExpression} = require './expression/at'
 
 exports.makeAbstract = makeAbstract = (syntaxTree) ->
   func = syntaxTree[0]
   args = syntaxTree[1..]
 
-  unless func? and func.length > 1 and typeof func is 'string'
+  unless func? and func.length > 0 and typeof func is 'string'
     throw new Error "(#{func}) is not a valid syntax in template"
 
   if func[0] is '@'
     switch func[1..]
+      when '' then new AtExpression syntaxTree
       when 'if' then new IfExpression syntaxTree
       when 'repeat' then new RepeatExpression syntaxTree
       when 'with' then new WithExpression syntaxTree

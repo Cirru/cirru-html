@@ -1,0 +1,41 @@
+
+{parseShort} = require 'cirru-parser'
+{join} = require 'path'
+
+exports.PartialExpression =
+class PartialExpression
+  constructor: (tree) ->
+    @partialPath = tree[1]
+    @filename = undefined
+
+    @children = []
+
+    @cachedInnerHTML = undefined
+
+  loadTemplate: (name) ->
+    unless typeof @partialPath is 'string'
+      throw new Error "(#{partialPath}) should be a static filename"
+    syntaxTree = parseShort (fs.readFileSync name, 'utf8')
+    for item in syntaxTree
+      @children.push (makeAbstract item)
+
+  cache: (data) ->
+    filename = join data['@filename'], @partialPath
+    scope =
+      __proto__: data
+      '@filename': filename
+    @loadTemplate filename
+
+    shouldCache = on
+    for item in @children
+      shouldCache = shouldCache and item.cache data
+    if shouldCache
+      @cachedInnerHTML = @render data
+    no
+
+  render: (data) ->
+    return @cachedInnerHTML if @cachedInnerHTML?
+    buffer = ''
+    for item in @children
+      buffer += item.render data
+    buffer

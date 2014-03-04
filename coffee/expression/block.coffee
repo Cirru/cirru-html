@@ -36,5 +36,5 @@ exports.BlockExpression = class BlockExpression
       if typeof item is 'string'
         buffer += item
       else
-        buffer += item.render()
+        buffer += item.render data
     buffer

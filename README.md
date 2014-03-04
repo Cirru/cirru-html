@@ -68,12 +68,16 @@ TextTag
 Classes for expressions
 
 ```
+AtExpression
 IfExpression
 RepeatExpression &key, &value
 WithExpression
 InsertExpression
 PartialExpression
 BlockExpression
-DefineExpression
 MethodsExpression
 ```
+
+Filenames passed to `@insert` and `@partial` are only names.
+
+`data` parameters contain at least `@filename` and `@methods: []`.

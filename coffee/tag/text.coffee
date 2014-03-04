@@ -25,7 +25,7 @@ exports.TextTag = class TextTag
       if typeof item is 'string'
         buffer.push item
       else
-        buffer.push item.render()
+        buffer.push item.render data
     buffer.join(' ')
 
   cache: (data) ->
