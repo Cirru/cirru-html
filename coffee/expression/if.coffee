@@ -17,7 +17,7 @@ exports.IfExpression = class IfExpression
   readArgs: ->
     @condition = args[0]
     @trueExpression = makeAbstract args[1]
-    @falseExpression = args[2] if args[2]?
+    @falseExpression = makeAbstract args[2] if args[2]?
 
   cache: (data) ->
     @trueExpression.cache data
