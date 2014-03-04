@@ -29,6 +29,7 @@ exports.makeAbstract = makeAbstract = (syntaxTree) ->
       when 'insert' then new InsertExpression syntaxTree
       when 'include' then new IncludeExpression syntaxTree
       when 'define' then new DefineExpression syntaxTree
+      when 'block' then new BlockExpression syntaxTree
       else new MethodsExpression syntaxTree
   else if func[0] in ['#', '.']
     new PairTag syntaxTree

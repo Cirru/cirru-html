@@ -1,5 +1,5 @@
 
-{join} = require 'path'
+{join, dirname} = require 'path'
 fs = require 'fs'
 {parseShort} = require 'cirru-parser'
 
@@ -19,7 +19,7 @@ exports.InsertExpression = class InsertExpression
     unless @childFile?
       throw new Error "base path of command insert missing"
     basePath = data['@filename']
-    destPath = join basePath, @childFile
+    destPath = join (dirname basePath), @childFile
     unless fs.existsSync destPath
       throw new Error "no dest (#{basePath}) (@childFile)"
     html = fs.readFileSync destPath, 'utf8'

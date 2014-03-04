@@ -1,6 +1,6 @@
 
 {parseShort} = require 'cirru-parser'
-{join} = require 'path'
+{join, dirname} = require 'path'
 
 exports.PartialExpression =
 class PartialExpression
@@ -20,7 +20,7 @@ class PartialExpression
       @children.push (makeAbstract item)
 
   cache: (data) ->
-    filename = join data['@filename'], @partialPath
+    filename = join (dirname data['@filename']), @partialPath
     scope =
       __proto__: data
       '@filename': filename

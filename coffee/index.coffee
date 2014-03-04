@@ -5,11 +5,11 @@
 {makeCache} = require './cache'
 {renderTree} = require './render'
 
-exports.render = (template, data) ->
-  # data._filename may be useful
-  (parseShort template)
-  .map (syntaxTree) ->
-    abstractTree = makeAbstract syntaxTree
-    cachedTree = makeCache abstractTree
-    renderTree cachedTree
-  .join ''
+exports.renderer = (template, initData) ->
+  syntaxTree = parseShort template
+  syntaxTree.unshift '@block'
+
+  abstractTree = makeAbstract syntaxTree
+  abstractTree.cache initData
+
+  (data) -> abstractTree.render data
