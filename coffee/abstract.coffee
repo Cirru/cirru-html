@@ -30,7 +30,7 @@ exports.makeAbstract = (syntaxTree) ->
       when 'insert' then new pkgInsert.Expression syntaxTree
       when 'include' then new pkgPartial.Expression syntaxTree
       when 'block' then new pkgBlock.Expression syntaxTree
-      else new MethodsExpression syntaxTree
+      else new pkgMethods.Expression syntaxTree
   else if func[0] in ['#', '.']
     new pkgSingle.Tag syntaxTree
   else if func[0].match /\w/

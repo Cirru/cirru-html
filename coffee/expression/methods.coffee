@@ -7,6 +7,6 @@ exports.Expression = class
   cache: (data) ->
     no
 
-  @render: (data) ->
+  render: (data) ->
     list = @args.map (item) -> data[item]
     data[@func] list...

@@ -7,4 +7,4 @@ exports.Expression = class
     no 
 
   render: (data) ->
-    data[@variable]
+    data[@variable] or ''

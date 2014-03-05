@@ -8,6 +8,6 @@ exports.renderer = (template, initData) ->
   syntaxTree.unshift '@block'
 
   abstractTree = abstract.makeAbstract syntaxTree
-  abstractTree.cache initData
+  abstractTree.cache (initData or {})
 
   (data) -> abstractTree.render data

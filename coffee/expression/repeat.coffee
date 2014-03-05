@@ -21,16 +21,21 @@ exports.Expression = class
     no
 
   render: (data) ->
-    buffer = ''
     array = @variable.render data
-    unless Arrai.isArray array
+    console.log 'array is', array
+    unless Array.isArray array
       throw new Error "(#{variable}) supposed to be an array"
-    for index, value in array
+    buffer = ''
+    for value, key in array
       scope =
         __proto__: data
-        '@key': index
+        '@key': (key + 1)
         '@value': value
 
+      if key is 0 then scope['@first'] = yes
+      if key is (array.length - 1) then scope['@last'] = yes
+
       for item in @children
-        @buffer += item.render scope
+        buffer += item.render scope
+
     buffer
