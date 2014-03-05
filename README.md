@@ -2,9 +2,12 @@
 Cirru HTML
 ------
 
-...converts Cirru to HTML.
+converts Cirru to HTML like a template engine.
 
-Demo http://repo.tiye.me/cirru-html/
+Poor demo http://repo.tiye.me/cirru-html/
+
+It has not been documented yet.
+Read `cirru/` to see what Cirru-HTML can do.
 
 ### Usage
 
@@ -12,13 +15,14 @@ Demo http://repo.tiye.me/cirru-html/
 npm install --save cirru-html
 ```
 ```
-{convert} = require 'cirru-htlm'
+{renderer} = require 'cirru-html'
 code = 'span (= cirru code)'
-html = convert code
+render = renderer code, {} # pass in initial data
+render {} # pass in data
 # '<span>cirru code</span>'
 ```
 
-### Demo
+### Only HTML
 
 ```cirru
 meta (:charset utf-8)
@@ -44,6 +48,20 @@ Converts to (this module doesn't do prettify things yet):
 <div id="demo">content</div>
 <div class="class-a"></div>
 ```
+
+### Template engine
+
+```
+@
+@if
+@block
+@repeat
+@with
+@insert
+@partial
+```
+
+Functions may also be passed into the renderer to apply on the data.
 
 ### Architeture
 
