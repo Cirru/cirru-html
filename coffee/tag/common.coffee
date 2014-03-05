@@ -13,7 +13,9 @@ exports.Tag = class CommonTag
     @tagName = 'div'
     @attrs =
       id: undefined
-      classes: []
+      class: []
+
+    console.log @attrs
     @children = []
 
     @readFunc()
@@ -34,32 +36,46 @@ exports.Tag = class CommonTag
         @addClass item[1..]
 
   addClass: (name) ->
-    unless name in @attrs.classes
-      @attrs.classes.push name
+    unless name in @attrs.class
+      @attrs.class.push name
 
   readArgs: ->
     for item in @args
       func = item[0]
-      arg = item[1]
       matchAttr = func.match /^:([\w-]+)/
       if matchAttr?
-        attr =  matchAttr[1]
-        if typeof arg is 'string'
-          value = arg
-        else if Array.isArray arg
+        prop = item[1]
+        attr = matchAttr[1]
+        if typeof prop is 'string'
+          value = prop
+        else if Array.isArray prop
           @lazyAttrs = yes
-          value = abstract.makeAbstract arg
-        else throw new Error "(#{arg}) is strange"
+          value = abstract.makeAbstract prop
+        else throw new Error "(#{prop}) is strange"
         if attr is 'id'
-          @attr.id = value
+          @attrs.id = value
         else if attr is 'class'
           @addClass value
+        else
+          @attrs[attr] = value
+      else
+        @children.push (abstract.makeAbstract item)
 
   renderAttrs: (data) ->
     buffer = []
+    delete @attrs.class if @attrs.class?.length is 0
+    delete @attrs.id if @attrs.id is ''
     for key, value of @attrs
       if typeof value is 'string'
         buffer.push "#{key}=\"#{value}\""
+      else if Array.isArray value
+        props = []
+        for item in value
+          if typeof item is 'string'
+            props.push item
+          else
+            props.push item.render(data)
+        buffer.push "#{key}=\"#{props.join(' ')}\""
       else if typeof value is 'object'
         result = value.render data
         buffer.push "#{key}='#{result}'"

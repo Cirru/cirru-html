@@ -2,7 +2,7 @@
 {renderer} = require './index'
 
 req = new XMLHttpRequest
-req.open 'GET', 'cirru/tmpl.cirru'
+req.open 'GET', 'cirru/html.cirru'
 req.send()
 req.onload = ->
   render = renderer req.responseText, {}

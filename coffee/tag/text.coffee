@@ -25,7 +25,7 @@ exports.Tag = class
       if typeof item is 'string'
         buffer.push item
       else
-        buffer.push item.render data
+        buffer.push (item.render data)
     buffer.join(' ')
 
   cache: (data) ->

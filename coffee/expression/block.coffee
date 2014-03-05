@@ -29,7 +29,7 @@ exports.Expression = class
 
   render: (data) ->
     if @cachedInnerHTML?
-      return cachedInnerHTML
+      return @cachedInnerHTML
       
     buffer = ''
     for item in @children

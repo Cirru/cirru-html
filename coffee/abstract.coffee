@@ -33,7 +33,7 @@ exports.makeAbstract = (syntaxTree) ->
       else new MethodsExpression syntaxTree
   else if func[0] in ['#', '.']
     new pkgSingle.Tag syntaxTree
-  else if func[0].match /[a-z]/
+  else if func[0].match /\w/
     tagName = func[0].match(/^\w+/)[0]
     if tagName in singleTags
       new pkgSingle.Tag syntaxTree

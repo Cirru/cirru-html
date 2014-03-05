@@ -5,7 +5,7 @@ div (:class demo-a demo-b)
   :data root node
   span $ = nothing
   div
-    p $ h3
+    div $ h3
       = This page is converted from Cirru
     span (= see "on ")
     a (:href https://github.com/Cirru/cirru-html)
