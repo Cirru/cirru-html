@@ -1,6 +1,9 @@
 
+fs = require 'fs'
 {parseShort} = require 'cirru-parser'
 {join, dirname} = require 'path'
+
+abstract = require '../abstract'
 
 exports.Expression = class
   constructor: (tree) ->
@@ -16,7 +19,7 @@ exports.Expression = class
       throw new Error "(#{partialPath}) should be a static filename"
     syntaxTree = parseShort (fs.readFileSync name, 'utf8')
     for item in syntaxTree
-      @children.push (makeAbstract item)
+      @children.push (abstract.makeAbstract item)
 
   cache: (data) ->
     filename = join (dirname data['@filename']), @partialPath

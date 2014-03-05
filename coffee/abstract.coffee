@@ -28,7 +28,7 @@ exports.makeAbstract = (syntaxTree) ->
       when 'repeat' then new pkgRepeat.Expression syntaxTree
       when 'with' then new pkgWith.Expression syntaxTree
       when 'insert' then new pkgInsert.Expression syntaxTree
-      when 'include' then new pkgPartial.Expression syntaxTree
+      when 'partial' then new pkgPartial.Expression syntaxTree
       when 'block' then new pkgBlock.Expression syntaxTree
       else new pkgMethods.Expression syntaxTree
   else if func[0] in ['#', '.']
