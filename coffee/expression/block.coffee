@@ -1,7 +1,7 @@
 
-{makeAbstract} = require '../abstract'
+abstract = require '../abstract'
 
-exports.BlockExpression = class BlockExpression
+exports.Expression = class
   constructor: (tree) ->
     @args = tree[1..]
 
@@ -16,7 +16,7 @@ exports.BlockExpression = class BlockExpression
       if typeof item is 'string'
         @children.push item
       else
-        @children.push (makeAbstract item)
+        @children.push (abstract.makeAbstract item)
 
   cache: (data) ->
     shoudCache = yes

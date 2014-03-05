@@ -3,7 +3,7 @@
 fs = require 'fs'
 {parseShort} = require 'cirru-parser'
 
-exports.InsertExpression = class InsertExpression
+exports.Expression = class
   constructor: (tree) ->
     @childFile = tree[1]
 

@@ -2,8 +2,7 @@
 {parseShort} = require 'cirru-parser'
 {join, dirname} = require 'path'
 
-exports.PartialExpression =
-class PartialExpression
+exports.Expression = class
   constructor: (tree) ->
     @partialPath = tree[1]
     @filename = undefined

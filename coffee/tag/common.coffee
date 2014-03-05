@@ -1,7 +1,7 @@
 
-{makeAbstract} = require '../abstract'
+abstract = require '../abstract'
 
-exports.CommonTag = class CommonTag
+exports.Tag = class CommonTag
   constructor: (tree) ->
     @func = tree[0]
     @args = tree[1..]
@@ -41,14 +41,14 @@ exports.CommonTag = class CommonTag
     for item in @args
       func = item[0]
       arg = item[1]
-      matchAttr = item.match /^:([\w-]+)/
+      matchAttr = func.match /^:([\w-]+)/
       if matchAttr?
         attr =  matchAttr[1]
         if typeof arg is 'string'
           value = arg
         else if Array.isArray arg
           @lazyAttrs = yes
-          value = makeAbstract arg
+          value = abstract.makeAbstract arg
         else throw new Error "(#{arg}) is strange"
         if attr is 'id'
           @attr.id = value
@@ -60,7 +60,7 @@ exports.CommonTag = class CommonTag
     for key, value of @attrs
       if typeof value is 'string'
         buffer.push "#{key}=\"#{value}\""
-      else
+      else if typeof value is 'object'
         result = value.render data
         buffer.push "#{key}='#{result}'"
     buffer.join(' ')

@@ -1,19 +1,20 @@
 
-{singleTags, SingleTag} = require './tag/single'
-{PairTag} = require './tag/pair'
-{TextTag} = require './tag/text'
+{singleTags} = require './tag/single'
 
-{IfExpression} = require './expression/if'
-{RepeatExpression} = require './expression/repeat'
-{WithExpression} = require './expression/with'
-{InsertExpression} = require './expression/insert'
-{PartialExpression} = require './expression/partial'
-{BlockExpression} = require './expression/block'
-{DefineExpression} = require './expression/define'
-{MethodsExpression} = require './expression/methods'
-{AtExpression} = require './expression/at'
+pkgPair = require './tag/pair'
+pkgSingle = require './tag/single'
+pkgText = require './tag/text'
 
-exports.makeAbstract = makeAbstract = (syntaxTree) ->
+pkgIf = require './expression/if'
+pkgRepeat = require './expression/repeat'
+pkgWith = require './expression/with'
+pkgInsert = require './expression/insert'
+pkgPartial = require './expression/partial'
+pkgBlock = require './expression/block'
+pkgMethods = require './expression/methods'
+pkgAt = require './expression/at'
+
+exports.makeAbstract = (syntaxTree) ->
   func = syntaxTree[0]
   args = syntaxTree[1..]
 
@@ -22,24 +23,23 @@ exports.makeAbstract = makeAbstract = (syntaxTree) ->
 
   if func[0] is '@'
     switch func[1..]
-      when '' then new AtExpression syntaxTree
-      when 'if' then new IfExpression syntaxTree
-      when 'repeat' then new RepeatExpression syntaxTree
-      when 'with' then new WithExpression syntaxTree
-      when 'insert' then new InsertExpression syntaxTree
-      when 'include' then new IncludeExpression syntaxTree
-      when 'define' then new DefineExpression syntaxTree
-      when 'block' then new BlockExpression syntaxTree
+      when '' then new pkgAt.Expression syntaxTree
+      when 'if' then new pkgIf.Expression syntaxTree
+      when 'repeat' then new pkgRepeat.Expression syntaxTree
+      when 'with' then new pkgWith.Expression syntaxTree
+      when 'insert' then new pkgInsert.Expression syntaxTree
+      when 'include' then new pkgPartial.Expression syntaxTree
+      when 'block' then new pkgBlock.Expression syntaxTree
       else new MethodsExpression syntaxTree
   else if func[0] in ['#', '.']
-    new PairTag syntaxTree
+    new pkgSingle.Tag syntaxTree
   else if func[0].match /[a-z]/
     tagName = func[0].match(/^\w+/)[0]
     if tagName in singleTags
-      new SingleTag syntaxTree
+      new pkgSingle.Tag syntaxTree
     else
-      new PairTag syntaxTree
+      new pkgPair.Tag syntaxTree
   else if func[0] is '='
-    new TextTag syntaxTree
+    new pkgText.Tag syntaxTree
   else
     throw new Error "(#{func}) is not recognized"

@@ -1,8 +1,7 @@
 
-{makeAbstract} = require '../abstract'
-{evaluate} = require '../evaluate'
+abstract = require '../abstract'
 
-exports.RepeatExpression = class RepeatExpression
+exports.Expression = class
   constructor: (tree) ->
     @variable = tree[1]
     @args = tree[2..]
@@ -12,8 +11,9 @@ exports.RepeatExpression = class RepeatExpression
     @readArgs()
 
   readArgs: ->
+    @variable = abstract.makeAbstract @variable
     for item in @args
-      @children.push (makeAbstract item)
+      @children.push (abstract.makeAbstract item)
 
   cache: (data) ->
     for item in @children
@@ -22,7 +22,7 @@ exports.RepeatExpression = class RepeatExpression
 
   render: (data) ->
     buffer = ''
-    array = evaluate data, @variable
+    array = @variable.render data
     unless Arrai.isArray array
       throw new Error "(#{variable}) supposed to be an array"
     for index, value in array

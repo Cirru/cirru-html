@@ -1,7 +1,7 @@
 
-{CommonTag} = require './common'
+common = require './common'
 
-exports.PairTag = class PairTag extends CommonTag
+exports.Tag = class extends common.Tag
   render: (data) ->
     attrs = @renderAttrs data
     innerHTML = @renderInnerHTML data

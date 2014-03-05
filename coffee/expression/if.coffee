@@ -1,8 +1,7 @@
 
-{makeAbstract} = require '../abstract'
-{evaluate} = require '../evaluate'
+abstract = require '../abstract'
 
-exports.IfExpression = class IfExpression
+exports.Expression = class
   constructor: (tree) ->
     @args = tree[1..]
 
@@ -15,9 +14,9 @@ exports.IfExpression = class IfExpression
     @readArgs()
 
   readArgs: ->
-    @condition = makeAbstract args[0]
-    @trueExpression = makeAbstract args[1]
-    @falseExpression = makeAbstract args[2] if args[2]?
+    @condition = abstract.makeAbstract args[0]
+    @trueExpression = abstract.makeAbstract args[1]
+    @falseExpression = abstract.makeAbstract args[2] if args[2]?
 
   cache: (data) ->
     @trueExpression.cache data

@@ -1,5 +1,5 @@
 
-exports.AtExpression = class AtExpression
+exports.Expression = class
   constructor: (tree) ->
     @variable = tree[1]
 

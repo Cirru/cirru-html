@@ -1,6 +1,5 @@
 
-exports.MethodsExpression =
-class MethodsExpression
+exports.Expression = class
   constructor: (tree) ->
     @func = tree[0][1..]
     @args = tree[1..]

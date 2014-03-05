@@ -1,3 +1,0 @@
-
-exports.renderTree = (tree) ->
-  'html'

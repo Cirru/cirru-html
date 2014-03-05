@@ -1,8 +1,7 @@
 
-{makeAbstract} = require '../abstract'
-{evaluate} = require '../evaluate'
+abstract = require '../abstract'
 
-exports.WithExpression = classWithtExpression
+exports.Expression = class
   constructor: (tree) ->
     @variable = tree[1]
     @args = tree[2..]
@@ -12,8 +11,9 @@ exports.WithExpression = classWithtExpression
     @readArgs()
 
   readArgs: ->
+    @variable = abstract.makeAbstract @variable
     for item in @args
-      @children.push (makeAbstract item)
+      @children.push (abstract.makeAbstract item)
 
   cache: (data) ->
     for item in @children
@@ -22,9 +22,9 @@ exports.WithExpression = classWithtExpression
 
   render: (data) ->
     buffer = ''
-    obj = evaluate data, @variable
+    obj = @variable.render data
     unless typeof obj is 'object'
-      throw new Error "(#{variable}) supposed to be an object"
+      throw new Error "(#@{variable}) supposed to be an object"
     for key, value in array
       scope =
         __proto__: data

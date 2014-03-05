@@ -1,7 +1,7 @@
 
-{makeAbstract} = require '../abstract'
+abstract = require '../abstract'
 
-exports.TextTag = class TextTag
+exports.Tag = class
   constructor: (tree) ->
     @args = tree[1..]
     @children = []
@@ -15,7 +15,7 @@ exports.TextTag = class TextTag
       if typeof item is 'string'
         @children.push item
       else
-        @children.push (makeAbstract item)
+        @children.push (abstract.makeAbstract item)
 
   render: (data) ->
     if @cachedInnerHTML?
