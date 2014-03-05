@@ -14,9 +14,10 @@ exports.Expression = class
     @readArgs()
 
   readArgs: ->
-    @condition = abstract.makeAbstract args[0]
-    @trueExpression = abstract.makeAbstract args[1]
-    @falseExpression = abstract.makeAbstract args[2] if args[2]?
+    @condition = abstract.makeAbstract @args[0]
+    @trueExpression = abstract.makeAbstract @args[1]
+    if @args[2]?
+      @falseExpression = abstract.makeAbstract @args[2]
 
   cache: (data) ->
     @trueExpression.cache data
@@ -25,7 +26,8 @@ exports.Expression = class
     no
 
   render: (data) ->
-    if @condition.render data
+    switcher = @condition.render data
+    if switcher
       @trueExpression.render data
     else if @falseExpression?
       @falseExpression.render data

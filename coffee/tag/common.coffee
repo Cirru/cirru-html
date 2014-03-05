@@ -15,7 +15,6 @@ exports.Tag = class CommonTag
       id: undefined
       class: []
 
-    console.log @attrs
     @children = []
 
     @readFunc()
