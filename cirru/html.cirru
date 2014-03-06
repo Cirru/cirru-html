@@ -1,6 +1,6 @@
 
 meta (:charset utf-8)
-div (:class demo-a demo-b)
+div (:class "demo-a demo-b")
   = demo of text
   :data root node
   span $ = nothing

@@ -22,7 +22,6 @@ exports.Expression = class
 
   render: (data) ->
     array = @variable.render data
-    console.log 'array is', array
     unless Array.isArray array
       throw new Error "(#{variable}) supposed to be an array"
     buffer = ''
