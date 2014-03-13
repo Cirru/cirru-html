@@ -3,5 +3,7 @@ build/
 cirru/
 coffee/
 
-calabash.coffee
+make.coffee
 index.html
+
+compiled/
