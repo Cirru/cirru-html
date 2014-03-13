@@ -2,14 +2,14 @@
 require 'shelljs/make'
 fs = require 'fs'
 
-recompile = (name) ->
-  exec "coffee -o src/ -bc #{name}", ->
-    exec 'browserify -o build/build.js -d src/demo.js', ->
-      station.reload 'repo/cirru/html'
-
 target.dev = ->
   station = require 'devtools-reloader-station'
   station.start()
+
+  recompile = (name) ->
+    exec "coffee -o src/ -bc #{name}", ->
+      exec 'browserify -o build/build.js -d src/demo.js', ->
+        station.reload 'repo/cirru/html'
 
   fs.watch './coffee', interval: 200, (type, name) ->
     recompile "coffee/#{name}"
@@ -19,34 +19,33 @@ target.dev = ->
     recompile "coffee/tag/#{name}"
 
 pkg = require './coffee/index'
-{prettyPrint} = require 'html'
 
 target.test_at = ->
   testFile = 'cirru/at.cirru'
   render = pkg.renderer (cat testFile)
   html = render demo: 'DEMO', nothing: 'NOTHING'
-  (prettyPrint html).to 'compiled/at.html'
+  html.to 'compiled/at.html'
   console.log 'wrote: compiled/at.html'
 
 target.test_block = ->
   testFile = 'cirru/block.cirru'
   render = pkg.renderer (cat testFile)
   html = render switcher: yes, noswitcher: no
-  (prettyPrint html).to 'compiled/block.html'
+  html.to 'compiled/block.html'
   console.log 'wrote: compiled/block.html'
 
 target.test_html = ->
   testFile = 'cirru/html.cirru'
   render = pkg.renderer (cat testFile)
   html = render()
-  (prettyPrint html).to 'compiled/html.html'
+  html.to 'compiled/html.html'
   console.log 'wrote: compiled/html.html'
 
 target.test_if = ->
   testFile = 'cirru/if.cirru'
   render = pkg.renderer (cat testFile)
   html = render switcher: yes
-  (prettyPrint html).to 'compiled/if.html'
+  html.to 'compiled/if.html'
   console.log 'wrote: compiled/if.html'
 
 target.test_insert = ->
@@ -60,35 +59,35 @@ target.test_methods = ->
   testFile = 'cirru/methods.cirru'
   render = pkg.renderer (cat testFile)
   html = render a: 1, b: 2, add: (x, y) -> x + y
-  (prettyPrint html).to 'compiled/methods.html'
+  html.to 'compiled/methods.html'
   console.log 'wrote: compiled/methods.html'
 
 target.test_partial = ->
   testFile = 'cirru/partial.cirru'
   render = pkg.renderer (cat testFile), '@filename': testFile
   html = render demo: 'demo text', nothing: 'e..'
-  (prettyPrint html).to "compiled/partial.html"
+  html.to "compiled/partial.html"
   console.log 'wrote: compiled/partial.html'
 
 target.test_repeat = ->
   testFile = 'cirru/repeat.cirru'
   render = pkg.renderer (cat testFile)
   html = render list: ['a', 'b', 'c', 'd']
-  (prettyPrint html).to "compiled/repeat.html"
+  html.to "compiled/repeat.html"
   console.log 'wrote: compiled/repeat.html'
 
 target.test_with = ->
   testFile = 'cirru/with.cirru'
   render = pkg.renderer (cat testFile), '@filename': testFile
   html = render datas: {a: 'A', b: 'B'}
-  (prettyPrint html).to "compiled/with.html"
+  html.to "compiled/with.html"
   console.log 'wrote: compiled/with.html'
 
 target.test_special = ->
   testFile = 'cirru/special.cirru'
   render = pkg.renderer (cat testFile)
   html = render()
-  (prettyPrint html).to "compiled/special.html"
+  html.to "compiled/special.html"
   console.log 'wrote: compiled/special.html'
 
 target.test = ->

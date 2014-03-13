@@ -45,7 +45,9 @@ exports.Tag = class CommonTag
       if matchAttr?
         prop = item[1]
         attr = matchAttr[1]
-        if typeof prop is 'string'
+        if not prop?
+          value = 'true'
+        else if typeof prop is 'string'
           value = prop
         else if Array.isArray prop
           @lazyAttrs = yes

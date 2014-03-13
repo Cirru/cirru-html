@@ -34,7 +34,7 @@ exports.makeAbstract = (syntaxTree) ->
   else if func[0..1] is '--'
     new pkgSingle.Tag syntaxTree
   else if func[0] in ['#', '.']
-    new pkgSingle.Tag syntaxTree
+    new pkgPair.Tag syntaxTree
   else if func[0].match /\w/
     tagName = func.match(/^\w+/)[0]
     if tagName in singleTags
