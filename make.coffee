@@ -1,11 +1,23 @@
 
 require 'shelljs/make'
+fs = require 'fs'
+
+station = require 'devtools-reloader-station'
+
+station.start()
+
+recompile = (name) ->
+  exec "coffee -o src/ -bc #{name}", ->
+    exec 'browserify -o build/build.js -d src/demo.js', ->
+      station.reload 'repo/cirru/html'
 
 target.dev = ->
-  exec 'pkill -f doodle', ->
-    exec 'doodle log:yes index.html cirru/ build/build.js', async: yes
-  exec 'coffee -o src/ -wbc coffee', async: yes
-  exec 'watchify -o build/build.js -d src/demo.js -v', async: yes
+  fs.watch './coffee', interval: 200, (type, name) ->
+    recompile "coffee/#{name}"
+  fs.watch './coffee/expression', interval: 200, (type, name) ->
+    recompile "coffee/expression/#{name}"
+  fs.watch './coffee/tag', interval: 200, (type, name) ->
+    recompile "coffee/tag/#{name}"
 
 target.test = ->
   pkg = require './coffee/index'
