@@ -7,9 +7,10 @@ target.dev = ->
   station.start()
 
   recompile = (name) ->
-    exec "coffee -o src/ -bc #{name}", ->
-      exec 'browserify -o build/build.js -d src/demo.js', ->
+    exec "coffee -o js/ -bc #{name}", ->
+      exec 'browserify -o build/build.js -d js/demo.js', ->
         station.reload 'repo/cirru/html'
+        console.log 'compiled'
 
   fs.watch './coffee', interval: 200, (type, name) ->
     recompile "coffee/#{name}"

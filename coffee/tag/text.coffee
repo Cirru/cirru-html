@@ -32,7 +32,8 @@ exports.Tag = class
     shouldCache = yes
     for item in @children
       if typeof item isnt 'string'
-        shouldCache = shouldCache and item.cache data
+        cacheOfChild = item.cache data
+        shouldCache = shouldCache and cacheOfChild
     if shouldCache
       @cachedInnerHTML = @render data
     shouldCache

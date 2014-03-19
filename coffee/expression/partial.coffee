@@ -30,7 +30,8 @@ exports.Expression = class
 
     shouldCache = on
     for item in @children
-      shouldCache = shouldCache and item.cache data
+      cacheOfChild = item.cache data
+      shouldCache = shouldCache and cacheOfChild
     if shouldCache
       @cachedInnerHTML = @render data
     no

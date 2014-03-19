@@ -87,7 +87,8 @@ exports.Tag = class CommonTag
       @cachedAttrs = @renderAttrs data
     shouldCache = yes
     for item in @children
-      shouldCache = shouldCache and item.cache data
+      cacheOfChild = item.cache data
+      shouldCache = shouldCache and cacheOfChild
     if shouldCache
       @cachedInnerHTML = @renderInnerHTML data
     if @cachedAttrs? and @cachedInnerHTML?

@@ -1,8 +1,8 @@
 {
   "name": "cirru-html",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "convert Cirru to HTML",
-  "main": "src/index.js",
+  "main": "js/index.js",
   "scripts": {
     "test": "coffee make.coffee test"
   },

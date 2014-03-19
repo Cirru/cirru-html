@@ -22,7 +22,8 @@ exports.Expression = class
     shoudCache = yes
     for item in @children
       if typeof item isnt 'string'
-        shoudCache = shoudCache and item.cache data
+        cacheOfChild = item.cache data
+        shoudCache = shoudCache and cacheOfChild
     if shoudCache
       @cachedInnerHTML = @render data
     shoudCache
