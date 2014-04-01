@@ -43,7 +43,7 @@ exports.Tag = class CommonTag
       func = item[0]
       matchAttr = func.match /^:([\w-]+)/
       if matchAttr?
-        prop = item[1]
+        prop = item[1..].join(' ')
         attr = matchAttr[1]
         if not prop?
           value = 'true'

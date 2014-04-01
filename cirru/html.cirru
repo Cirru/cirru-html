@@ -15,3 +15,7 @@ div (:class "demo-a demo-b")
 div.demo
 div#demo $ = content
 .class-a
+#long-class
+  :attr "is-a"
+    , "is-b"
+    , "is-c"

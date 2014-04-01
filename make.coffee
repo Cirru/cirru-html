@@ -2,7 +2,7 @@
 require 'shelljs/make'
 fs = require 'fs'
 
-target.dev = ->
+target.watch = ->
   station = require 'devtools-reloader-station'
   station.start()
 
