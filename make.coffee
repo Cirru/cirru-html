@@ -1,104 +1,107 @@
+#!/usr/bin/env coffee
+
+project = 'repo/cirru/html'
+interval = interval: 300
+watch = no
 
 require 'shelljs/make'
 fs = require 'fs'
+path = require 'path'
+station = require 'devtools-reloader-station'
+browserify = require 'browserify'
+exorcist = require 'exorcist'
 
-target.watch = ->
-  station = require 'devtools-reloader-station'
-  station.start()
-
-  recompile = (name) ->
-    exec "coffee -o js/ -bc #{name}", ->
-      exec 'browserify -o build/build.js -d js/demo.js', ->
-        station.reload 'repo/cirru/html'
-        console.log 'compiled'
-
-  fs.watch './coffee', interval: 200, (type, name) ->
-    recompile "coffee/#{name}"
-  fs.watch './coffee/expression', interval: 200, (type, name) ->
-    recompile "coffee/expression/#{name}"
-  fs.watch './coffee/tag', interval: 200, (type, name) ->
-    recompile "coffee/tag/#{name}"
+{makeRender, render} = require './coffee/index'
+{pare} = require 'cirru-parser'
 
 pkg = require './coffee/index'
+pkg.setResolver (basePath, child, scope) ->
+  dest = path.join (path.dirname basePath), child
+  scope?['@filename'] = dest
+  html = fs.readFileSync dest, 'utf8'
 
-target.test_at = ->
-  testFile = 'cirru/at.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render demo: 'DEMO', nothing: 'NOTHING'
-  html.to 'compiled/at.html'
-  console.log 'wrote: compiled/at.html'
+startTime = (new Date).getTime()
+process.on 'exit', ->
+  now = (new Date).getTime()
+  duration = (now - startTime) / 1000
+  console.log "\nfinished in #{duration}s"
 
-target.test_block = ->
-  testFile = 'cirru/block.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render switcher: yes, noswitcher: no
-  html.to 'compiled/block.html'
-  console.log 'wrote: compiled/block.html'
+reload = -> station.reload project if watch
 
-target.test_html = ->
-  testFile = 'cirru/html.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render()
-  html.to 'compiled/html.html'
-  console.log 'wrote: compiled/html.html'
+compileCoffee = (name, callback) ->
+  exec "coffee -o js/ -bc coffee/#{name}", ->
+    console.log "done: coffee, compiled coffee/#{name}"
+    do callback
 
-target.test_if = ->
-  testFile = 'cirru/if.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render switcher: yes
-  html.to 'compiled/if.html'
-  console.log 'wrote: compiled/if.html'
+packJS = ->
+  bundle = browserify ['./js/main']
+  .bundle debug: yes
+  bundle.pipe (exorcist 'build/build.js.map')
+  .pipe (fs.createWriteStream 'build/build.js', 'utf8')
+  bundle.on 'end', ->
+    console.log 'done: browserify'
+    do reload
 
-target.test_insert = ->
-  testFile = 'cirru/insert.cirru'
-  render = pkg.renderer (cat testFile), '@filename': testFile
-  html = render()
-  html.to 'compiled/insert.html'
-  console.log 'wrote: compiled/insert.html'
+target.cirru = ->
+  file = 'cirru/index.cirru'
+  data =
+    '@filename': file
+    names: [
+      'at'
+      'block'
+      'html'
+      'if'
+      'insert'
+      'methods'
+      'partial'
+      'repeat'
+      'special'
+      'with'
+    ]
 
-target.test_methods = ->
-  testFile = 'cirru/methods.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render a: 1, b: 2, add: (x, y) -> x + y
-  html.to 'compiled/methods.html'
-  console.log 'wrote: compiled/methods.html'
+  (render (cat file), data).to 'index.html'
+  console.log 'done: cirru'
+  do reload
 
-target.test_partial = ->
-  testFile = 'cirru/partial.cirru'
-  render = pkg.renderer (cat testFile), '@filename': testFile
-  html = render demo: 'demo text', nothing: 'e..'
-  html.to "compiled/partial.html"
-  console.log 'wrote: compiled/partial.html'
+target.js = ->
+  exec 'coffee -o js/ -bc coffee/'
 
-target.test_repeat = ->
-  testFile = 'cirru/repeat.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render list: ['a', 'b', 'c', 'd']
-  html.to "compiled/repeat.html"
-  console.log 'wrote: compiled/repeat.html'
+target.compile = ->
+  target.cirru()
+  exec 'coffee -o js/ -bc coffee/', ->
+    packJS()
 
-target.test_with = ->
-  testFile = 'cirru/with.cirru'
-  render = pkg.renderer (cat testFile), '@filename': testFile
-  html = render datas: {a: 'A', b: 'B'}
-  html.to "compiled/with.html"
-  console.log 'wrote: compiled/with.html'
+target.watch = ->
+  watch = yes
+  fs.watch 'cirru/', interval, target.cirru
+  fs.watch 'coffee/', interval, (type, name) ->
+    if type is 'change'
+      compileCoffee name, ->
+        do packJS
 
-target.test_special = ->
-  testFile = 'cirru/special.cirru'
-  render = pkg.renderer (cat testFile)
-  html = render()
-  html.to "compiled/special.html"
-  console.log 'wrote: compiled/special.html'
+  station.start()
+
+
+test = (name) ->
+  testFile = "cirru/#{name}.cirru"
+  js = cat "compiled/data/#{name}.js"
+  data = eval "(#{js})"
+  data?['@filename'] = testFile
+  html = pkg.render (pare cat testFile), data
+  html.to "compiled/#{name}.html"
+  console.log "done: compiled/#{name}.html"
+
+target.run = ->
+  test 'at', demo: 'DEMO', nothing: 'NOTHING'
 
 target.test = ->
-  target.test_at()
-  target.test_block()
-  target.test_html()
-  target.test_if()
-  target.test_insert()
-  target.test_methods()
-  target.test_partial()
-  target.test_repeat()
-  target.test_with()
-  target.test_special()
+  test 'at'
+  test 'block'
+  test 'if'
+  test 'html'
+  test 'methods'
+  test 'repeat'
+  test 'special'
+  test 'with'
+  test 'insert'
+  test 'partial'

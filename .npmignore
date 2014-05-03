@@ -7,3 +7,4 @@ make.coffee
 index.html
 
 compiled/
+css/

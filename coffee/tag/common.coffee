@@ -40,19 +40,26 @@ exports.Tag = class CommonTag
 
   readArgs: ->
     for item in @args
+      if typeof item is 'string'
+        @children.push render: (-> item), cache: (-> yes)
+        continue
+
       func = item[0]
       matchAttr = func.match /^:([\w-]+)/
       if matchAttr?
-        prop = item[1..].join(' ')
+        prop = item[1..]
         attr = matchAttr[1]
-        if not prop?
+
+        if prop.length is 0
           value = 'true'
-        else if typeof prop is 'string'
-          value = prop
-        else if Array.isArray prop
+        else if typeof prop[0] is 'string'
+          value = prop.join(' ')
+        else if Array.isArray prop[0]
           @lazyAttrs = yes
+          prop = prop[0]
           value = abstract.makeAbstract prop
         else throw new Error "(#{prop}) is strange"
+
         if attr is 'id'
           @attrs.id = value
         else if attr is 'class'

@@ -1,7 +1,5 @@
 
-fs = require 'fs'
-{parseShort} = require 'cirru-parser'
-{join, dirname} = require 'path'
+{pare} = require 'cirru-parser'
 
 abstract = require '../abstract'
 
@@ -14,19 +12,22 @@ exports.Expression = class
 
     @cachedInnerHTML = undefined
 
-  loadTemplate: (name) ->
-    unless typeof @partialPath is 'string'
-      throw new Error "(#{partialPath}) should be a static filename"
-    syntaxTree = parseShort (fs.readFileSync name, 'utf8')
-    for item in syntaxTree
-      @children.push (abstract.makeAbstract item)
+  resolve: ->
+    throw new Error 'use .setResolver to add solver'
 
   cache: (data) ->
-    filename = join (dirname data['@filename']), @partialPath
+
+    unless typeof @partialPath is 'string'
+      throw new Error "(#{partialPath}) should be a static filename"
+
     scope =
       __proto__: data
-      '@filename': filename
-    @loadTemplate filename
+      '@filename': undefined # will be rerwitten in resolver
+
+    code = @resolve data['@filename'], @partialPath, scope
+    syntaxTree = pare code
+    for item in syntaxTree
+      @children.push (abstract.makeAbstract item)
 
     shouldCache = on
     for item in @children

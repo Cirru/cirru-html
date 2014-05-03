@@ -1,6 +1,8 @@
 
 {singleTags} = require './tag/single'
 
+stringify = (x) -> JSON.stringify x, null, 2
+
 pkgPair = require './tag/pair'
 pkgSingle = require './tag/single'
 pkgText = require './tag/text'
@@ -19,7 +21,7 @@ exports.makeAbstract = (syntaxTree) ->
   args = syntaxTree[1..]
 
   unless func? and func.length > 0 and typeof func is 'string'
-    throw new Error "(#{func}) is not a valid syntax in template"
+    throw new Error "(#{stringify func}) is not valid as func"
 
   if func[0] is '@'
     switch func[1..]

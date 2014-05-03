@@ -1,0 +1,4 @@
+{
+  switcher: true,
+  noswitcher: false
+}

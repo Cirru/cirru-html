@@ -1,8 +1,4 @@
 
-{join, dirname} = require 'path'
-fs = require 'fs'
-{parseShort} = require 'cirru-parser'
-
 exports.Expression = class
   constructor: (tree) ->
     @childFile = tree[1]
@@ -13,13 +9,13 @@ exports.Expression = class
     @cachedInnerHTML = @render data
     yes
 
+  resolve: ->
+    throw new Error 'use .setResolver to add solver'
+
   render: (data) ->
     if @cachedInnerHTML?
       return @cachedInnerHTML
     unless @childFile?
       throw new Error "base path of command insert missing"
-    basePath = data['@filename']
-    destPath = join (dirname basePath), @childFile
-    unless fs.existsSync destPath
-      throw new Error "no dest (#{basePath}) (@childFile)"
-    html = fs.readFileSync destPath, 'utf8'
+
+    html = @resolve data['@filename'], @childFile

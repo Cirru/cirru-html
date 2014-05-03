@@ -1,4 +1,6 @@
 
 p $ = 'file start'
-@insert ../package.json
+
+@insert insert.cirru
+
 p $ = 'file end'

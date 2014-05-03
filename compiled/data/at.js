@@ -1,0 +1,4 @@
+{
+  demo: 'DEMO',
+  nothing: 'NOTHING'
+}

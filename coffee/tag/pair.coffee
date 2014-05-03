@@ -15,6 +15,5 @@ exports.Tag = class extends common.Tag
     if @cachedInnerHTML?
       return @cachedInnerHTML
     buffer = ''
-    for item in @children
-      buffer += item.render data
+    buffer += (item.render data) for item in @children
     buffer

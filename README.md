@@ -2,12 +2,9 @@
 Cirru HTML
 ------
 
-converts Cirru to HTML like a template engine.
+A template engine that converts Cirru to HTML.
 
-Poor demo http://repo.tiye.me/cirru-html/
-
-It has not been documented yet.
-Read `cirru/` to see what Cirru-HTML can do.
+See demos on http://repo.cirru.org/html
 
 ### Usage
 
@@ -15,39 +12,80 @@ Read `cirru/` to see what Cirru-HTML can do.
 npm install --save cirru-html
 ```
 ```
-{renderer} = require 'cirru-html'
+{makeRender, render, setResolver} = require 'cirru-html'
 code = 'span (= cirru code)'
-render = renderer code, {} # pass in initial data
-render {} # pass in data
-# '<span>cirru code</span>'
+data = {}
+
+renderer = makeRender code, {}
+renderer {} # pass in data # => '<span>cirru code</span>'
+
+render code, data # => '<span>cirru code</span>'
 ```
 
-### Only HTML
+* `makeRender`
+
+`template` is a code string in Cirru,
+or a JSON Object of parsed Cirru code (with `cirruParser.pare`).
+
+`renderer` is a cached renderer that make it fast.
+`data` is optional.
+
+In Node, you need `data['@filename']` to run `@insert` and `@partial`.
+
+* `render`
+
+Shorthand for using `renderer` in one call:
+
+```coffee
+exports.render = (template, data) ->
+  render = exports.makeRender template, data
+  render data
+```
+
+* `setResolver`
+
+Solution for reading file is taken out from module it self
+
+```coffee
+html = require 'cirru-html'
+html.setResolver (basePath, child, scope) ->
+  dest = path.join (path.dirname basePath), child
+  scope?['@filename'] = dest
+  html = fs.readFileSync dest, 'utf8'
+```
+
+```coffee
+setResolver (basePath, child, scope) ->
+  match = child.match /(\w+)\.cirru/
+  element = q "##{match[1]} .file"
+  element.value or element.innerHTML
+```
+
+### Demo of HTML
+
+Here's a demo of HTML:
 
 ```cirru
-meta (:charset utf-8)
-div (:class demo-a demo-b)
-  = demo of text
-  :data root node
-  span $ = nothing
-  = plain text
-#entry.demo (:class c)
-div.demo
-div#demo $ = content
-.class-a
+doctype
+
+html
+  html
+    title $ = "Cirru HTML"
+    meta $ :charset utf-8
+    link (:rel stylesheet) $ :href css/style.css
+    script (:defer) $ :src build/build.js
+  body
+    #entry
+    @repeat (@ names)
+      .test
+        :id (@ @value)
+        textarea.file
+        textarea.data
+        button.button ->
+        textarea.result
 ```
 
-Converts to (this module doesn't do prettify things yet):
-
-```html
-<meta charset="utf-8">
-<div class="demo-a demo-b" data="root node">demo of text
-  <span>nothing</span>plain text</div>
-<div id="entry" class="c demo"></div>
-<div class="demo"></div>
-<div id="demo">content</div>
-<div class="class-a"></div>
-```
+*Notice:* the compiled HTML is not prettified.
 
 ### Template engine
 
@@ -99,3 +137,11 @@ MethodsExpression
 Filenames passed to `@insert` and `@partial` are only names.
 
 `data` parameters contain at least `@filename` and `@methods: []`.
+
+### Changelog
+
+* Since `0.2`, `renderer` is removed
+
+### License
+
+MIT

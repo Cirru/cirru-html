@@ -1,7 +1,7 @@
 {
   "name": "cirru-html",
-  "version": "0.1.7",
-  "description": "convert Cirru to HTML",
+  "version": "0.2.0-0",
+  "description": "Template engine that converts Cirru to HTML",
   "main": "js/index.js",
   "scripts": {
     "test": "coffee make.coffee test"
@@ -11,9 +11,9 @@
     "html"
   ],
   "author": "jiyinyiyong",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "cirru-parser": "*"
+    "cirru-parser": "~0.8.1-1"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/Cirru/cirru-html/issues"
   },
-  "homepage": "http://repo.tiye.me/cirru-html/"
+  "homepage": "http://repo.cirru.org/html/",
+  "devDependencies": {
+    "browserify": "^3.46.0",
+    "devtools-reloader-station": "0.0.4",
+    "exorcist": "^0.1.6",
+    "shelljs": "^0.2.6"
+  }
 }
