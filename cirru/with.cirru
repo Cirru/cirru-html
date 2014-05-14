@@ -1,3 +1,3 @@
 
 @with (@ datas)
-  = got (@ @key) and (@ @value)
+  = (@ a) and (@ b)

@@ -25,12 +25,7 @@ exports.Expression = class
     obj = @variable.render data
     unless typeof obj is 'object'
       throw new Error "(#{@variable}) supposed to be an object"
-    for key, value of obj
-      scope =
-        __proto__: data
-        '@key': key
-        '@value': value
-
-      for item in @children
-        buffer += item.render scope
+    obj.__proto__ = data
+    for item in @children
+      buffer += item.render obj
     buffer

@@ -2,3 +2,5 @@
 node_modules/
 js/
 build/
+
+/index.html
