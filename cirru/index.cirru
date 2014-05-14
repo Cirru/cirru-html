@@ -2,8 +2,8 @@
 doctype
 
 html
-  html
-    title $ = "Cirru HTML"
+  head
+    title "Cirru HTML"
     meta $ :charset utf-8
     link (:rel stylesheet) $ :href css/style.css
     link (:rel icon)
@@ -13,7 +13,6 @@ html
     #entry
     @repeat (@ names)
       .test
-
         :id (@ @value)
         pre.file $ :contenteditable
         pre.data $ :contenteditable

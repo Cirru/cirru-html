@@ -44,7 +44,9 @@ exports.render = (template, data) ->
 
 * `setResolver`
 
-Solution for reading file is taken out from module it self
+Solution for reading file is taken out from the module.
+
+* For Node:
 
 ```coffee
 html = require 'cirru-html'
@@ -53,6 +55,8 @@ html.setResolver (basePath, child, scope) ->
   scope?['@filename'] = dest
   html = fs.readFileSync dest, 'utf8'
 ```
+
+* For browsers, maybe from an element:
 
 ```coffee
 setResolver (basePath, child, scope) ->
@@ -69,8 +73,8 @@ Here's a demo of HTML:
 doctype
 
 html
-  html
-    title $ = "Cirru HTML"
+  head
+    title "Cirru HTML"
     meta $ :charset utf-8
     link (:rel stylesheet) $ :href css/style.css
     script (:defer) $ :src build/build.js
@@ -81,7 +85,7 @@ html
         :id (@ @value)
         textarea.file
         textarea.data
-        button.button ->
+        button.button " =>"
         textarea.result
 ```
 
@@ -140,6 +144,7 @@ Filenames passed to `@insert` and `@partial` are only names.
 
 ### Changelog
 
+* Fixed `with` in `0.2.1`
 * Since `0.2`, `renderer` is removed
 
 ### License
