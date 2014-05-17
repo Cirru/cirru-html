@@ -25,18 +25,6 @@ cirru = ->
   file = 'cirru/index.cirru'
   data =
     '@filename': file
-    names: [
-      'at'
-      'block'
-      'html'
-      'if'
-      'insert'
-      'methods'
-      'partial'
-      'repeat'
-      'special'
-      'with'
-    ]
 
   (pkg.render (cat file), data).to 'index.html'
   console.log 'done: cirru'
@@ -79,16 +67,17 @@ target.patch = ->
     options:
       at: 'patch'
 
-target.sync = ->
+target.rsync = ->
   mission.rsync
     file: './'
+    dest: 'tiye:~/repo/cirru/html/'
     options:
-      dest: 'tiye:~/repo/topics.tiye.me/'
       exclude: [
         'node_modules/'
         'README.md'
         'coffee'
         'js'
+        '.git/'
       ]
 
 test = (name) ->

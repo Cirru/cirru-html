@@ -27,7 +27,7 @@
     "browserify": "^3.46.0",
     "devtools-reloader-station": "0.0.4",
     "exorcist": "^0.1.6",
-    "mission": "0.0.3",
+    "mission": "0.0.4",
     "shelljs": "^0.2.6"
   }
 }
