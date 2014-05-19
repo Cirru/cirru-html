@@ -19,8 +19,6 @@ html
           :target _blank
           = GitHub
         = " for more detail about hot to use it."
-        = " Notice that <tt>cirru-html</tt> contains <tt>__proto__</tt>"
-        = ", which is not supported in old browsers."
     #grammars
       #html.grammar.long
         .note

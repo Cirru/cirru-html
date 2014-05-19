@@ -25,7 +25,11 @@ exports.Expression = class
     obj = @variable.render data
     unless typeof obj is 'object'
       throw new Error "(#{@variable}) supposed to be an object"
-    obj.__proto__ = data
+
+    for k, v of data
+      unless obj[k]?
+        obj[k] = v
+
     for item in @children
       buffer += item.render obj
     buffer

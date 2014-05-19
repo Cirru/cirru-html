@@ -26,10 +26,13 @@ exports.Expression = class
       throw new Error "(#{variable}) supposed to be an array"
     buffer = ''
     for value, key in array
-      scope =
-        __proto__: data
-        '@key': (key + 1)
-        '@value': value
+      scope = {}
+      scope['@key'] = key + 1
+      scope['@value'] = value
+
+      for k, v of data
+        unless scope[k]?
+          scope[k] = v
 
       if key is 0 then scope['@first'] = yes
       if key is (array.length - 1) then scope['@last'] = yes

@@ -20,9 +20,9 @@ exports.Expression = class
     unless typeof @partialPath is 'string'
       throw new Error "(#{partialPath}) should be a static filename"
 
-    scope =
-      __proto__: data
-      '@filename': undefined # will be rerwitten in resolver
+    scope = {}
+    for k, v of data
+      scope[k] = v
 
     code = @resolve data['@filename'], @partialPath, scope
     syntaxTree = pare code
