@@ -86,7 +86,7 @@ exports.Tag = class CommonTag
         buffer.push "#{key}=\"#{props.join(' ')}\""
       else if typeof value is 'object'
         result = value.render data
-        buffer.push "#{key}='#{result}'"
+        buffer.push "#{key}=\"#{result}\""
     buffer.join(' ')
 
   cache: (data) ->

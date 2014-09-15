@@ -144,7 +144,12 @@ Filenames passed to `@insert` and `@partial` are only names.
 
 ### Changelog
 
-* Fixed `with` in `0.2.1`
+* `0.2.2`
+  * Fixed double quote in some attributes
+
+* `0.2.1`
+  * Fixed `with`
+
 * Since `0.2`, `renderer` is removed
 
 ### License
