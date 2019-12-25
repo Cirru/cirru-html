@@ -28,7 +28,7 @@ html
             = " And all it's Cirru grammar here."
         .test
           textarea.file $ = (@insert html.cirru)
-          textarea.data $ = (@insert ../compiled/data/html.js)
+          textarea.data $ = (@insert ../data/html.js)
           button.button =>
           textarea.result
       #special.grammar
@@ -41,7 +41,7 @@ html
             = ", you may use <tt>-- $</tt> for short."
         .test
           textarea.file $ = (@insert special.cirru)
-          textarea.data $ = (@insert ../compiled/data/special.js)
+          textarea.data $ = (@insert ../data/special.js)
           button.button =>
           textarea.result
       #at.grammar
@@ -51,7 +51,7 @@ html
             = " It's available for innerText and attributes."
         .test
           textarea.file $ = (@insert at.cirru)
-          textarea.data $ = (@insert ../compiled/data/at.js)
+          textarea.data $ = (@insert ../data/at.js)
           button.button =>
           textarea.result
       #methods.grammar
@@ -59,7 +59,7 @@ html
           = "Somehow, customized methods are also supported, writing like this:"
         .test
           textarea.file $ = (@insert methods.cirru)
-          textarea.data $ = (@insert ../compiled/data/methods.js)
+          textarea.data $ = (@insert ../data/methods.js)
           button.button =>
           textarea.result
       #if.grammar
@@ -67,7 +67,7 @@ html
           = "This is <tt>if</tt> syntax:"
         .test
           textarea.file $ = (@insert if.cirru)
-          textarea.data $ = (@insert ../compiled/data/if.js)
+          textarea.data $ = (@insert ../data/if.js)
           button.button =>
           textarea.result
       #block.grammar.long
@@ -75,7 +75,7 @@ html
           = "And <tt>block</tt> put a block of code into one:"
         .test
           textarea.file $ = (@insert block.cirru)
-          textarea.data $ = (@insert ../compiled/data/block.js)
+          textarea.data $ = (@insert ../data/block.js)
           button.button =>
           textarea.result
       #repeat.grammar
@@ -84,7 +84,7 @@ html
           = " <tt>@key</tt> and <tt>@value</tt> are writtern to that new scopes."
         .test
           textarea.file $ = (@insert repeat.cirru)
-          textarea.data $ = (@insert ../compiled/data/repeat.js)
+          textarea.data $ = (@insert ../data/repeat.js)
           button.button =>
           textarea.result
       #with.grammar
@@ -92,7 +92,7 @@ html
           = "And here comes <tt>with</tt> which load data as a scope:"
         .test
           textarea.file $ = (@insert with.cirru)
-          textarea.data $ = (@insert ../compiled/data/with.js)
+          textarea.data $ = (@insert ../data/with.js)
           button.button =>
           textarea.result
       #insert.grammar
@@ -100,7 +100,7 @@ html
           = "<tt>@insert</tt> is used to add raw file into Cirru HTML:"
         .test
           textarea.file $ = (@insert insert.cirru)
-          textarea.data $ = (@insert ../compiled/data/insert.js)
+          textarea.data $ = (@insert ../data/insert.js)
           button.button =>
           textarea.result
       #partial.grammar
@@ -109,6 +109,6 @@ html
           = ", but this time the loaded files should be in Cirru grammar."
         .test
           textarea.file $ = (@insert partial.cirru)
-          textarea.data $ = (@insert ../compiled/data/partial.js)
+          textarea.data $ = (@insert ../data/partial.js)
           button.button =>
           textarea.result

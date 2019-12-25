@@ -1,6 +1,5 @@
 
 node_modules/
-js/
-build/
-
+dist/
+lib/
 /index.html

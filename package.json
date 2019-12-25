@@ -4,7 +4,8 @@
   "description": "Template engine that converts Cirru to HTML",
   "main": "js/index.js",
   "scripts": {
-    "test": "coffee make.coffee test"
+    "compile": "coffee -o lib/ -bc src/",
+    "test": "coffee example/test.coffee"
   },
   "keywords": [
     "cirru",
@@ -24,10 +25,8 @@
   },
   "homepage": "http://repo.cirru.org/html/",
   "devDependencies": {
-    "browserify": "^3.46.0",
-    "devtools-reloader-station": "0.0.4",
-    "exorcist": "^0.1.6",
-    "mission": "0.0.4",
+    "coffeescript": "^2.4.1",
+    "http-server": "^0.12.0",
     "shelljs": "^0.2.6"
   }
 }
