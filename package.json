@@ -4,6 +4,12 @@
   "description": "Template engine that converts Cirru to HTML",
   "main": "js/index.js",
   "scripts": {
+    "clean": "rm -rfv dist/*",
+    "watch": "yarn html && webpack-dev-server --config webpack.dev.cirru",
+    "release": "yarn clean && webpack --config webpack.release.cirru && yarn release-html",
+    "html": "coffee template.coffee",
+    "release-html": "env=release coffee template.coffee",
+    "up": "yarn build && tiye-up",
     "compile": "coffee -o lib/ -bc src/",
     "test": "coffee example/test.coffee"
   },
@@ -14,7 +20,7 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "dependencies": {
-    "cirru-parser": "^0.9.0-1"
+    "cirru-parser": "^0.10.7"
   },
   "repository": {
     "type": "git",
@@ -25,8 +31,23 @@
   },
   "homepage": "http://repo.cirru.org/html/",
   "devDependencies": {
+    "assets-webpack-plugin": "^3.9.10",
+    "cirru-script": "0.5.5",
+    "cirru-script-loader": "0.5.4",
+    "coffee-loader": "^0.9.0",
     "coffeescript": "^2.4.1",
+    "css-loader": "^3.4.0",
+    "duplicate-package-checker-webpack-plugin": "^3.0.0",
+    "file-loader": "^5.0.2",
+    "hsl": "^0.1.1",
     "http-server": "^0.12.0",
-    "shelljs": "^0.2.6"
+    "json-loader": "^0.5.3",
+    "stir-template": "^0.2.2",
+    "style-loader": "^1.1.2",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-hud": "^0.1.2"
   }
 }

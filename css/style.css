@@ -11,6 +11,7 @@ body {
     background-color: rgb(242, 243, 255);
     padding: 10px 0px 0px 0px;
     margin-bottom: 50px;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 #header {
@@ -71,12 +72,13 @@ body {
     height: 250px;
     font-size: 14px;
     line-height: 1.5em;
-    background: transparent;
+    padding: 8px;
+    background-color: white;
     outline: none;
-    border: none;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.74);
+    border: 1px solid #ddd;
     margin: 2px 6px;
-    font-family: menlo, monospace;
+    border-radius: 3px;
+    font-family: Source Code Pro, Menlo, Consolas, monospace;
 }
 
 .test .button {
@@ -90,7 +92,6 @@ body {
     line-height: 2em;
     color: white;
 }
-
 
 .test .file {
     width: 500px;

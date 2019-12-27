@@ -5,10 +5,9 @@ html
   head
     title "Cirru HTML"
     meta $ :charset utf-8
-    link (:rel stylesheet) $ :href css/style.css
     link (:rel icon)
-      :href http://cirru.qiniudn.com/cirru-32x32.png
-    script (:defer) $ :src build/main.js
+      :href http://cdn.tiye.me/logo/cirru.png
+    script (:defer) $ :src $ @ js
   body
     #header
       #title "Cirru HTML"

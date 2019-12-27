@@ -3,8 +3,10 @@ path = require 'path'
 
 pkg = require '../src/index'
 
-{cat} = require 'shelljs'
+fs = require 'fs'
 {pare} = require 'cirru-parser'
+
+cat = (filepath) => fs.readFileSync filepath, 'utf8'
 
 pkg.setResolver (basePath, child, scope) ->
   dest = path.join (path.dirname basePath), child
