@@ -1,6 +1,8 @@
 
 {makeRender, setResolver, render} = require './index'
 
+require '../css/style.css'
+
 setResolver (basePath, child, scope) ->
   match = child.match /(\w+)\.cirru/
   element = document.querySelector "##{match[1]} .file"

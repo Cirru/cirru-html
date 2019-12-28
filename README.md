@@ -8,6 +8,8 @@ See demos on http://repo.cirru.org/html
 
 ### Usage
 
+![](https://img.shields.io/npm/v/cirru-html.svg)
+
 ```
 npm install --save cirru-html
 ```

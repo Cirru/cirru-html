@@ -1,7 +1,8 @@
 
-build/
-cirru/
-coffee/
+css/
+dist/
+src/
+example/
 
 make.coffee
 index.html
