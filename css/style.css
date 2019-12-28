@@ -5,38 +5,40 @@
 
 body {
     margin: 0;
+
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgb(242, 243, 255);
-    padding: 10px 0px 0px 0px;
+    background-color: hsl(0,0%,100%);
     margin-bottom: 50px;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Hind, Helvetica, Arial, sans-serif;
 }
 
 #header {
     text-align: center;
+    background-color: hsl(200,100%,70%);
+    color: white;
+    padding: 40px 0px;
 }
 
 #title {
-    font-size: 60px;
-    font-family: "Helvetica Neue";
+    font-size: 80px;
+    font-family: Josefin Sans, Helvetica Neue, sans-serif;
     font-weight: 100;
     letter-spacing: 2px;
-    padding: 30px 120px 30px 0px;
+    padding: 60px 0px 60px 0px;
+    text-align: center;
 }
 
 #hint {
-    color: gray;
-    font-size: 14px;
-    padding-left: 250px;
+    margin-left: 20px;
 }
 
 #about {
     text-align: left;
-    width: 800px;
-    color: gray;
-    margin: 40px auto;
+    width: 1180px;
+    margin: 0 auto;
+    margin-bottom: 0px;
 }
 
 #grammars {
@@ -58,39 +60,55 @@ body {
 .test {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 20px;
     justify-content: center;
 }
 
 .long .test textarea {
-    height: 640px;
+    height: 480px;
 }
 
 .test textarea {
     width: 400px;
-    height: 250px;
-    font-size: 14px;
-    line-height: 1.5em;
+    height: 160px;
+    font-size: 13px;
+    line-height: 20px;
     padding: 8px;
-    background-color: white;
+    background-color: hsl(0,0%,98%);
     outline: none;
     border: 1px solid #ddd;
-    margin: 2px 6px;
+    margin: 0px 6px;
     border-radius: 3px;
     font-family: Source Code Pro, Menlo, Consolas, monospace;
 }
 
 .test .button {
     display: inline-block;
-    vertical-align: top;
-    background-color: rgb(60, 60, 255);
+    background-color: hsl(220, 60%, 76%);
     outline: none;
     border: none;
-    border-radius: 12px;
+    border-radius: 4px;
     cursor: pointer;
-    line-height: 2em;
+    line-height: 24px;
+    height: 24px;
     color: white;
+    font-size: 13px;
+    margin: 4px 0;
+    white-space: nowrap;
+    transform: scale(1);
+    transition-duration: 300ms;
+    font-family: Josefin Sans, Helvetica Neue, sans-serif;
+}
+
+.test .button:hover {
+    background-color: hsl(220, 60%, 80%);
+}
+
+.test .button:active {
+    background-color: hsl(220, 60%, 80%);
+    transform: scale(1.04);
+    transition-duration: 0ms;
 }
 
 .test .file {
@@ -103,8 +121,8 @@ body {
 
 tt {
     font-size: 14px;
-    background: rgb(203, 172, 224);
-    color: white;
+    background: hsl(0,0%,98%);
+    border: 1px solid #e8e8e8;
     padding: 3px 7px;
     border-radius: 3px;
 }

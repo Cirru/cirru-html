@@ -9,7 +9,7 @@
     "release": "yarn clean && webpack --config webpack.release.cirru && yarn release-html",
     "html": "coffee template.coffee",
     "release-html": "env=release coffee template.coffee",
-    "up": "yarn build && tiye-up",
+    "up": "yarn release && tiye-up",
     "compile": "coffee -o lib/ -bc src/",
     "test": "coffee example/test.coffee"
   },
