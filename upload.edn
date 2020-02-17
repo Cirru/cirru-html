@@ -1,6 +1,6 @@
 
 {:host "cirru.org"
  :uploads [{:from "dist/*"
-            :to "cdn/cirru-html/"}
+            :to "/web-assets/cdn/cirru-html/"}
            {:from "dist/*"
-            :to "repo/Cirru/cirru-html/"}]}
+            :to "/web-assets/repo/Cirru/cirru-html/"}]}
