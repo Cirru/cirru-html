@@ -20,7 +20,12 @@ html
         a (:href https://github.com/Cirru/cirru-html)
           :target _blank
           = GitHub
+        = ". This is also part of "
+        a
+          :href "http://cirru.org"
+          = "Cirru Project"
         = "."
+
     #grammars
       #html.grammar.long
         .note
