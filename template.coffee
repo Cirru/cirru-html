@@ -12,7 +12,7 @@ env = if process.env.env is 'release' then 'release' else 'dev'
 assets =
   switch env
     when 'dev'
-      "http://localhost:8080/main.js"
+      "/main.js"
     when 'release'
       assetsJson = require './dist/assets'
       assetsJson.main.js
