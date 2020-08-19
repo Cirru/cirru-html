@@ -1,6 +1,6 @@
 {
   "name": "cirru-html",
-  "version": "0.2.2",
+  "version": "0.2.3-a1",
   "description": "Template engine that converts Cirru to HTML",
   "main": "js/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "dependencies": {
-    "cirru-parser": "^0.10.7"
+    "cirru-parser": "^0.10.8-a1"
   },
   "repository": {
     "type": "git",

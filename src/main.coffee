@@ -13,8 +13,11 @@ document.body.onclick = (event) ->
     parent = event.target.parentElement
     file = parent.querySelector('.file').value
     data = parent.querySelector('.data').value
-    html = render file, (eval "(#{data})")
-    parent.querySelector('.result').value = html
+    try
+      html = render file, (eval "(#{data})")
+      parent.querySelector('.result').value = html
+    catch err
+      parent.querySelector('.result').value = err.stack
 
 buttons = document.querySelectorAll('.button')
 for button in buttons

@@ -778,10 +778,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-cirru-parser@^0.10.7:
-  version "0.10.7"
-  resolved "https://registry.npmjs.org/cirru-parser/-/cirru-parser-0.10.7.tgz#0f6fe6f3e343b145fbd30c3505e1adb8be349e32"
-  integrity sha1-D2/m8+NDsUX70ww1BeGtuL40njI=
+cirru-parser@^0.10.8-a1:
+  version "0.10.8-a1"
+  resolved "https://registry.npmjs.org/cirru-parser/-/cirru-parser-0.10.8-a1.tgz#238fc9d0d2d9254cfd25b198ffb29ab09b1e6ab0"
+  integrity sha512-x8lYYXK3Lvd8nXlsOpuW4Q8KNmlwuEw1JTIJFg6nucem/tD/b3eftVzudhEJke1Amav6b7xa86ZhHiDMXDMrPw==
 
 cirru-script-loader@0.5.5:
   version "0.5.5"

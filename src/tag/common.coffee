@@ -45,6 +45,9 @@ exports.Tag = class CommonTag
         continue
 
       func = item[0]
+      if not func?
+        console.error 'args:', @args, 'func:', @func
+        throw new Error("Empty in args")
       matchAttr = func.match /^:([\w-]+)/
       if matchAttr?
         prop = item[1..]

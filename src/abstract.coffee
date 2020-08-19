@@ -21,6 +21,7 @@ exports.makeAbstract = (syntaxTree) ->
   args = syntaxTree[1..]
 
   unless func? and func.length > 0 and typeof func is 'string'
+    console.error("evaluation tree:", JSON.stringify(syntaxTree))
     throw new Error "(#{stringify func}) is not valid as func"
 
   if func[0] is '@'
