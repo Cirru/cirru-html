@@ -81,6 +81,7 @@ body {
     margin: 0px 6px;
     border-radius: 3px;
     font-family: Source Code Pro, Menlo, Consolas, monospace;
+    white-space: pre;
 }
 
 .test .button {
